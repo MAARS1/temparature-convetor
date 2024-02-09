@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="temperatureConverterApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+    <style>
+        .converter-container {
+            margin: 20px auto;
+            padding: 20px;
+            width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .conversion-result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        h1{
+            color:gold;
+            text-shadow: 2px 2px 5px red;
+            border: 2px solid black;
+        }
+        body{
+           background-image: url(aaa.gif);
+           background-repeat: no-repeat;
+           background-size: cover;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('temperatureConverterApp', [])
+            .controller('TemperatureConverterController', ['$scope', function($scope) {
+                $scope.fahrenheit = 0;
+                $scope.celsius = 0;
+
+                $scope.convertToFahrenheit = function() {
+                    $scope.celsius = ($scope.fahrenheit - 32) * (5/9);
+                };
+
+                $scope.convertToCelsius = function() {
+                    $scope.fahrenheit = ($scope.celsius * (9/5)) + 32;
+                };
+            }]);
+    </script>
+</head>
+<body>
+    <center><h1>MY DAHSH BOARD</h1></center>
+    <div ng-controller="TemperatureConverterController" class="converter-container">
+        <h1>Temperature Converter</h1>
+        <div class="input-container">
+            <label>
+                Fahrenheit:
+                <input type="number" ng-model="fahrenheit" ng-change="convertToFahrenheit()">
+            </label>
+            <label>
+                Celsius:
+                <input type="number" ng-model="celsius" ng-change="convertToCelsius()">
+            </label>
+        </div>
+        <div class="conversion-result">
+            {{fahrenheit}}°F = {{celsius}}°C
+        </div>
+    </div>
+</body>
+</html>
